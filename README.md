@@ -31,19 +31,26 @@ AI-powered PDF Retrieval-Augmented Generation (RAG) engine that ingests PDFs, ch
 - Demonstration of RAG pipelines for AI-first startups
 - Rapid prototyping of semantic search interfaces
 
-## Project Structure
-
 multi_document_engine/
 ├── backend/
-│ ├── app.py # FastAPI application
-│ ├── embeddings/ # Embedding model loader and vectorization
-│ ├── chunking/ # Document chunking utilities
-│ ├── loaders/ # PDF loader
-│ ├── pinecone_client/ # Pinecone integration
-│ └── data/pdfs/ # Example PDFs
-├── frontend/ # React frontend
-│ └── ... # React components and pages
-└── requirements.txt # Python dependencies
+│   ├── app.py                   # FastAPI application
+│   ├── embeddings/              # Embedding model loader and vectorization
+│   │   └── embedder.py
+│   ├── chunking/                # Document chunking utilities
+│   │   └── chunker.py
+│   ├── loaders/                 # PDF loader
+│   │   └── pdf_loader.py
+│   ├── pinecone_client/         # Pinecone integration
+│   │   └── pinecone_client.py
+│   └── data/
+│       └── pdfs/                # Example PDFs
+├── frontend/                     # React frontend
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   └── App.js
+│   └── package.json
+└── requirements.txt              # Python dependencies
 
 ## 🛠️ Installation
 
