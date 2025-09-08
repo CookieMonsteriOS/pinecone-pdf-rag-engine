@@ -63,17 +63,21 @@ cd pinecone-pdf-rag-engine/multi_document_engine
 Backend Setup
 
 1. (Optional) Create and activate a virtual environment:
+
 python -m venv venv
 source venv/bin/activate  # On Windows use: venv\Scripts\activate
 
 2. Install Python dependencies:
+
 pip install -r backend/requirements.txt
 
 3. Create a .env file inside backend/ with your Pinecone credentials:
+
 PINECONE_API_KEY=<your-pinecone-api-key>
 PINECONE_ENV=<your-pinecone-environment>
 
 4. Run the FastAPI backend:
+
 cd backend
 uvicorn app:app --reload
 
