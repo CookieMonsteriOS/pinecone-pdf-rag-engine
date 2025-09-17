@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from embeddings.embedder import load_model, embed_chunks
 from loaders.pdf_loader import load_pdfs
 from chunking.chunker import chunk_documents
-from pinecone_client.pinecone_client import init_pinecone, create_index, upsert_vectors, query_index
+from pinecone_client.pinecone_client import init_pinecone, create_index, upsert_vectors, query_index,rag_answer
 
 app = FastAPI()
 
@@ -74,3 +74,25 @@ def rag_query(
         {"id": r["id"], "score": r["score"], "metadata": r["metadata"]}
         for r in results
     ]
+
+@app.get("/chat")
+def chat_with_docs(q:str):
+    """
+        Query Chat GPT with context from the Pinecone index.
+        
+        Example:
+        
+        query = "What deep learning techniques are most effective for text classification?"
+        response = rag_query(query)
+        
+        "CNNs and RNNs were historically common, but Transformer-based architectures 
+        such as BERT and its variants now dominate text classification tasks due to 
+        their ability to capture long-range dependencies."
+    """ 
+    global model
+    if model is None:
+        model = load_model()
+    
+    answer = rag_answer(index,q, model,top_k=5)
+    return {"answer ": answer}
+    

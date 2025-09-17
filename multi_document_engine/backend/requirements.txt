@@ -21,6 +21,7 @@ cryptography==45.0.7
 debugpy==1.8.13
 decorator==5.2.1
 defusedxml==0.7.1
+distro==1.9.0
 et_xmlfile==2.0.0
 executing==2.2.0
 fastapi==0.115.12
@@ -48,6 +49,7 @@ isoduration==20.11.0
 itsdangerous==2.2.0
 jedi==0.19.2
 Jinja2==3.1.6
+jiter==0.11.0
 joblib==1.5.0
 json5==0.10.0
 jsonpointer==3.0.0
@@ -81,6 +83,7 @@ nltk==3.9.1
 notebook==7.3.2
 notebook_shim==0.2.4
 numpy==2.2.5
+openai==1.107.3
 openpyxl==3.1.5
 orjson==3.10.18
 overrides==7.7.0

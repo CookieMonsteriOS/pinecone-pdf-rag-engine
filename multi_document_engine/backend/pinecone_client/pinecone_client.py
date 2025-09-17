@@ -7,6 +7,7 @@ load_dotenv()
 
 pinecone_client = None
 
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 def init_pinecone():
     """
@@ -90,3 +91,19 @@ def query_index(index, query_text: str, model, top_k: int = 5):
             normalized.append({"id": getattr(m, "id", None), "score": getattr(
                 m, "score", None), "metadata": getattr(m, "metadata", {})})
     return normalized
+
+def rag_answer(index, query_text: str, model, top_k: int = 5):
+    """
+    Query Pinecone and query ChatGPT with the context return answer.
+    """
+    
+    results = query_index(index, query_text, model, top_k)
+    context = "\n\n".join([result["metadata"]["text"] for result in results])
+    prompt = " You are a helpful assistant. with access to the following context" + context + "\n\n Answer the question: " + query_text
+    response = client.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "user", "content": prompt}
+        ]
+    )
+    return response.choices[0].message.content
